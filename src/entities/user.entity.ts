@@ -1,13 +1,11 @@
 
 import { IsEmail, IsNumber, IsString } from 'class-validator';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Common } from './common.entity';
+import { Program } from './program.entity'
 
-@Entity('user') 
-export class User {
-
-    @PrimaryColumn()
-    @IsNumber()
-    id: number;
+@Entity('users') 
+export class User extends Common{
 
     @Column()
     @IsEmail()
@@ -17,5 +15,6 @@ export class User {
     @IsString()
     password: string
 
-
+    @OneToMany(() => Program, (program) => program.user)
+    programs: Program[];
 }

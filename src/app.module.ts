@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from './modules/users/users.module';
-import { UsersService } from './modules/users/users.service';
-import { UsersController } from './modules/users/users.controller';
 import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import { AuthController } from './modules/auth/auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
+import { UsersModule } from './modules/users/users.module';
+import { Program } from './entities/program.entity';
 
 @Module({
   imports: [
@@ -21,10 +19,10 @@ import { User } from './entities/user.entity';
       username: 'root', // ✅ le plus souvent "root" sous WAMP
       password: '', // ✅ mot de passe vide par défaut sur WAMP (à changer en prod)
       database: 'training_db', // ✅ nom de ta base de données
-      entities: [User], // ou path: [__dirname + '/**/*.entity{.ts,.js}']
+      entities: [Program,User], // ou path: [__dirname + '/**/*.entity{.ts,.js}']
       synchronize: true, // ❗ uniquement en dev !
     }),
-    AuthModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
